@@ -1,0 +1,5 @@
+{
+    "python.terminal.activateEnvironment": true,
+    "python.formatting.autopep8Args": ["--max-line-length", "240", "--experimental"],
+    "python.linting.enabled": true
+}
