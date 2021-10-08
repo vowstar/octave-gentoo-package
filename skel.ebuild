@@ -15,7 +15,11 @@ RDEPEND="sci-mathematics/octave"
 DEPEND="${RDEPEND}"
 BDEPEND="virtual/pkgconfig"
 
+<% if "ocl" == PN %>
+S="${WORKDIR}/${PN/octave-/}"
+<% else %>
 S="${WORKDIR}/${P/octave-/}"
+<% endif %>
 
 src_install() {
 	local INST_PREFIX="${D}/usr/share/octave/packages"
