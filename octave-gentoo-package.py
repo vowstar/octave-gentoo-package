@@ -28,9 +28,14 @@ try:
     )
 
     pkg_list = []
+    ignore_list = ['windows']
 
     for item in result:
         pn, description, p = item
+
+        if pn in ignore_list:
+            continue
+
         description = re.sub(' +', ' ', description.strip())
         print(pn, description, p)
         pkg_list.append('sci-mathematics/octave-' + pn)

@@ -20,7 +20,7 @@ RDEPEND="
 DEPEND="${RDEPEND}"
 BDEPEND="virtual/pkgconfig"
 
-<% if "ocl" == PN %>
+<% if PN in ["bim", "ocl"] %>
 S="${WORKDIR}/${PN/octave-/}"
 <% else %>
 S="${WORKDIR}/${P/octave-/}"
@@ -53,5 +53,5 @@ pkg_postrm() {
 	einfo "Updating Octave internal packages cache..."
 	octave --no-history --no-init-file --no-site-file --no-window-system -q -f \
 		--eval "pkg rebuild;" || die
-	elog "Please remove 'pkg load ${PN/octave-/}' to ~/.octaverc"
+	elog "Please remove 'pkg load ${PN/octave-/}' from ~/.octaverc"
 }

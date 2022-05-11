@@ -17,3 +17,17 @@ RDEPEND="
 "
 
 DEPEND="${RDEPEND}"
+
+pkg_postinst() {
+	elog "Please append these to ~/.octaverc"
+<% for PKG in PKG_LIST %>
+	elog "pkg load <{ PKG | replace("sci-mathematics/octave-", "") }>"
+<% endfor %>
+}
+
+pkg_postrm() {
+	elog "Please remove these from ~/.octaverc"
+<% for PKG in PKG_LIST %>
+	elog "pkg load <{ PKG | replace("sci-mathematics/octave-", "") }>"
+<% endfor %>
+}
