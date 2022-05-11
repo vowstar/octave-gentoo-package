@@ -1,8 +1,9 @@
-import os
-import sys
-import re
 import codecs
+import datetime
 import jinja2
+import os
+import re
+import sys
 import urllib.request
 
 assert sys.version_info >= (3, 9), "Python version must be at least 3.9.0"
@@ -22,13 +23,17 @@ try:
         variable_start_string = '<{',
         variable_end_string = '}>',
         comment_start_string = '<#',
-        comment_end_string = '#>'
+        comment_end_string = '#>',
+        keep_trailing_newline=True
     )
+
+    pkg_list = []
 
     for item in result:
         pn, description, p = item
         description = re.sub(' +', ' ', description.strip())
         print(pn, description, p)
+        pkg_list.append('sci-mathematics/octave-' + pn)
         os.makedirs(os.path.join('sci-mathematics', 'octave-' + pn), exist_ok=True)
 
         in_file = 'metadata.xml'
@@ -54,6 +59,40 @@ try:
                     'P': p
                 })
             )
+
+    pkg_list.sort()
+
+    pn = 'meta'
+    description = 'Merge this to pull in all octave forge packages'
+    p = pn + '-' + datetime.date.today().strftime("%Y%m%d")
+
+    os.makedirs(os.path.join('sci-mathematics', 'octave-' + pn), exist_ok=True)
+
+    in_file = 'metadata.xml'
+    out_file = os.path.join('sci-mathematics', 'octave-' + pn, 'metadata.xml')
+    print('Writting ' + out_file + ' ...')
+    with codecs.open(out_file, 'w', encoding = 'utf-8') as text_file:
+        text_file.write(
+            environment.get_template(in_file).render({
+                'DESCRIPTION': description,
+                'PN': pn,
+                'P': p,
+                'PKG_LIST' : pkg_list
+            })
+        )
+
+    in_file = 'skel-meta.ebuild'
+    out_file = os.path.join('sci-mathematics', 'octave-' + pn, 'octave-' + p + '.ebuild')
+    print('Writting ' + out_file + ' ...')
+    with codecs.open(out_file, 'w', encoding = 'utf-8') as text_file:
+        text_file.write(
+            environment.get_template(in_file).render({
+                'DESCRIPTION': description,
+                'PN': pn,
+                'P': p,
+                'PKG_LIST' : pkg_list
+            })
+        )
         
 except AttributeError:
     pass
