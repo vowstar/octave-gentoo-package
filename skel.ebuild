@@ -20,7 +20,7 @@ RDEPEND="
 DEPEND="${RDEPEND}"
 BDEPEND="virtual/pkgconfig"
 
-<% if PN in ["bim", "ocl"] %>
+<% if PN in ["bim", "cgi", "data-smoothing", "divand", "fem-fenics", "fpl", "fuzzy-logic-toolkit", "level-set", "ltfat", "msh", "mvn", "ncarray", "ocs", "quaternion", "queueing", "stk", "vrml"] %>
 S="${WORKDIR}/${PN/octave-/}"
 <% else %>
 S="${WORKDIR}/${P/octave-/}"
