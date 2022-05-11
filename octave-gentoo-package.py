@@ -29,7 +29,7 @@ try:
 
     pkg_list = []
     ignore_generate_list = ['windows']
-    ignore_meta_list = ['database', 'dicom', 'fem-fenics', 'geometry', 'image', 'level-set', 'ltfat', 'ocs', 'quaternion','secs2d', 'sparsersb', 'tisean', 'vibes', 'image-acquisition']
+    ignore_meta_list = ['database', 'dicom', 'fem-fenics', 'geometry', 'image', 'level-set', 'ltfat', 'ocs', 'quaternion','secs2d', 'sparsersb', 'tisean', 'vibes', 'image-acquisition', 'strings', 'fits']
 
     for item in result:
         pn, description, p = item
