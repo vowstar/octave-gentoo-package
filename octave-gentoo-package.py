@@ -28,17 +28,21 @@ try:
     )
 
     pkg_list = []
-    ignore_list = ['windows']
+    ignore_generate_list = ['windows']
+    ignore_meta_list = ['database', 'dicom', 'fem-fenics', 'geometry', 'image', 'level-set', 'ltfat', 'ocs', 'quaternion','secs2d', 'sparsersb', 'tisean', 'vibes']
 
     for item in result:
         pn, description, p = item
 
-        if pn in ignore_list:
+        if pn in ignore_generate_list:
             continue
 
         description = re.sub(' +', ' ', description.strip())
         print(pn, description, p)
-        pkg_list.append('sci-mathematics/octave-' + pn)
+
+        if pn not in ignore_meta_list:
+            pkg_list.append('sci-mathematics/octave-' + pn)
+
         os.makedirs(os.path.join('sci-mathematics', 'octave-' + pn), exist_ok=True)
 
         in_file = 'metadata.xml'

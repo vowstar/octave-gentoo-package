@@ -11,11 +11,56 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm ~arm64 ~ppc ~ppc64 ~riscv ~x86"
 RESTRICT="test"
 
-RDEPEND="
-<% if "audio" == PN %>
-	media-libs/rtmidi
+<% set RDEPEND_LIST = ["sci-mathematics/octave"] %>
+<% if "database" == PN %>
+<% set RDEPEND_LIST = RDEPEND_LIST + ["dev-db/postgresql"] %>
+<% set RDEPEND_LIST = RDEPEND_LIST + ["sci-mathematics/octave-struct"] %>
 <% endif %>
-	sci-mathematics/octave
+<% if "audio" == PN %>
+<% set RDEPEND_LIST = RDEPEND_LIST + ["media-libs/rtmidi"] %>
+<% endif %>
+<% if "dicom" == PN %>
+<% set RDEPEND_LIST = RDEPEND_LIST + ["sci-libs/gdcm"] %>
+<% endif %>
+<% if "fem-fenics" == PN %>
+<% set RDEPEND_LIST = RDEPEND_LIST + ["sci-libs/dolfin"] %>
+<% set RDEPEND_LIST = RDEPEND_LIST + ["dev-python/ffcx"] %>
+<% endif %>
+<% if "fits" == PN %>
+<% set RDEPEND_LIST = RDEPEND_LIST + ["sci-libs/cfitsio"] %>
+<% endif %>
+<% if "geometry" == PN %>
+<% set RDEPEND_LIST = RDEPEND_LIST + ["sci-mathematics/octave-matgeom"] %>
+<% endif %>
+<% if "image-acquisition" == PN %>
+<% set RDEPEND_LIST = RDEPEND_LIST + ["x11-libs/fltk"] %>
+<% set RDEPEND_LIST = RDEPEND_LIST + ["media-libs/libv4l"] %>
+<% endif %>
+<% if "ltfat" == PN %>
+<% set RDEPEND_LIST = RDEPEND_LIST + ["sci-libs/fftw"] %>
+<% set RDEPEND_LIST = RDEPEND_LIST + ["virtual/lapack"] %>
+<% set RDEPEND_LIST = RDEPEND_LIST + ["virtual/blas"] %>
+<% set RDEPEND_LIST = RDEPEND_LIST + ["media-libs/portaudio"] %>
+<% set RDEPEND_LIST = RDEPEND_LIST + ["virtual/jre"] %>
+<% endif %>
+<% if "miscellaneous" == PN %>
+<% set RDEPEND_LIST = RDEPEND_LIST + ["sci-calculators/units"] %>
+<% set RDEPEND_LIST = RDEPEND_LIST + ["sys-libs/libtermcap-compat"] %>
+<% set RDEPEND_LIST = RDEPEND_LIST + ["sys-libs/ncurses"] %>
+<% endif %>
+<% if "sparsersb" == PN %>
+<% set RDEPEND_LIST = RDEPEND_LIST + ["sys-libs/librsb"] %>
+<% endif %>
+<% if "strings" == PN %>
+<% set RDEPEND_LIST = RDEPEND_LIST + ["dev-libs/libpcre"] %>
+<% endif %>
+<% if "tisean" == PN %>
+<% set RDEPEND_LIST = RDEPEND_LIST + ["sci-mathematics/octave-signal"] %>
+<% endif %>
+RDEPEND="
+<% for PKG in RDEPEND_LIST | sort %>
+	<{ PKG }>
+<% endfor %>
 "
 DEPEND="${RDEPEND}"
 BDEPEND="virtual/pkgconfig"
