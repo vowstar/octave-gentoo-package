@@ -6,9 +6,11 @@
 		<email>vowstar@gmail.com</email>
 		<name>Huang Rui</name>
 	</maintainer>
+<% if "meta" != PN %>
 	<upstream>
 		<changelog>https://octave.sourceforge.io/<{ PN | replace("dev-octave/", "") }>/NEWS.html</changelog>
 		<doc lang="en">https://octave.sourceforge.io/<{ PN | replace("dev-octave/", "") }>/overview.html</doc>
 		<remote-id type="sourceforge">octave</remote-id>
 	</upstream>
+<% endif %>
 </pkgmetadata>
