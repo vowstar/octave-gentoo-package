@@ -71,14 +71,16 @@ try:
 
     pkg_list.sort()
 
+    os.makedirs(os.path.join('sci-mathematics', pn), exist_ok=True)
+
     pn = 'meta'
     description = 'Merge this to pull in all octave forge packages'
     p = pn + '-' + datetime.date.today().strftime("%Y%m%d")
 
-    os.makedirs(os.path.join('dev-octave', pn), exist_ok=True)
+    os.makedirs(os.path.join('sci-mathematics', pn), exist_ok=True)
 
     in_file = 'metadata.xml'
-    out_file = os.path.join('dev-octave', pn, 'metadata.xml')
+    out_file = os.path.join('sci-mathematics', pn, 'metadata.xml')
     print('Writting ' + out_file + ' ...')
     with codecs.open(out_file, 'w', encoding = 'utf-8') as text_file:
         text_file.write(
@@ -91,7 +93,7 @@ try:
         )
 
     in_file = 'skel-meta.ebuild'
-    out_file = os.path.join('dev-octave', pn, 'octave-' + p + '.ebuild')
+    out_file = os.path.join('sci-mathematics', pn, 'octave-' + p + '.ebuild')
     print('Writting ' + out_file + ' ...')
     with codecs.open(out_file, 'w', encoding = 'utf-8') as text_file:
         text_file.write(
