@@ -11,7 +11,6 @@ inherit octaveforge
 
 DESCRIPTION="<{DESCRIPTION}>"
 HOMEPAGE="https://octave.sourceforge.io/<{PN}>"
-SRC_URI="https://downloads.sourceforge.net/octave/${P/octave-/}.tar.gz -> ${P}.tar.gz"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~arm64 ~ppc ~ppc64 ~riscv ~x86"

@@ -58,7 +58,7 @@ try:
             )
 
         in_file = 'skel.ebuild'
-        out_file = os.path.join('dev-octave', pn, 'octave-' + p + '.ebuild')
+        out_file = os.path.join('dev-octave', pn, p + '.ebuild')
         print('Writting ' + out_file + ' ...')
         with codecs.open(out_file, 'w', encoding = 'utf-8') as text_file:
             text_file.write(
