@@ -13,7 +13,7 @@ contents = urllib.request.urlopen("http://octave.sourceforge.net/packages.php").
 try:
     result = re.findall('<h3 class="package_name".+>(.+)</a></h3><p class="package_desc">(.+)</p><p class="deep_links.+package=(.+).tar.gz"', contents)
     print(result)
-    os.makedirs('sci-mathematics', exist_ok=True)
+    os.makedirs('dev-octave', exist_ok=True)
 
     environment = jinja2.Environment(
         loader = jinja2.FileSystemLoader(searchpath = "./", encoding = 'utf-8', followlinks = True),
@@ -41,12 +41,12 @@ try:
         print(pn, description, p)
 
         if pn not in ignore_meta_list:
-            pkg_list.append('sci-mathematics/octave-' + pn)
+            pkg_list.append('dev-octave/' + pn)
 
-        os.makedirs(os.path.join('sci-mathematics', 'octave-' + pn), exist_ok=True)
+        os.makedirs(os.path.join('dev-octave', pn), exist_ok=True)
 
         in_file = 'metadata.xml'
-        out_file = os.path.join('sci-mathematics', 'octave-' + pn, 'metadata.xml')
+        out_file = os.path.join('dev-octave', pn, 'metadata.xml')
         print('Writting ' + out_file + ' ...')
         with codecs.open(out_file, 'w', encoding = 'utf-8') as text_file:
             text_file.write(
@@ -58,7 +58,7 @@ try:
             )
 
         in_file = 'skel.ebuild'
-        out_file = os.path.join('sci-mathematics', 'octave-' + pn, 'octave-' + p + '.ebuild')
+        out_file = os.path.join('dev-octave', pn, 'octave-' + p + '.ebuild')
         print('Writting ' + out_file + ' ...')
         with codecs.open(out_file, 'w', encoding = 'utf-8') as text_file:
             text_file.write(
@@ -75,10 +75,10 @@ try:
     description = 'Merge this to pull in all octave forge packages'
     p = pn + '-' + datetime.date.today().strftime("%Y%m%d")
 
-    os.makedirs(os.path.join('sci-mathematics', 'octave-' + pn), exist_ok=True)
+    os.makedirs(os.path.join('dev-octave', pn), exist_ok=True)
 
     in_file = 'metadata.xml'
-    out_file = os.path.join('sci-mathematics', 'octave-' + pn, 'metadata.xml')
+    out_file = os.path.join('dev-octave', pn, 'metadata.xml')
     print('Writting ' + out_file + ' ...')
     with codecs.open(out_file, 'w', encoding = 'utf-8') as text_file:
         text_file.write(
@@ -91,7 +91,7 @@ try:
         )
 
     in_file = 'skel-meta.ebuild'
-    out_file = os.path.join('sci-mathematics', 'octave-' + pn, 'octave-' + p + '.ebuild')
+    out_file = os.path.join('dev-octave', pn, 'octave-' + p + '.ebuild')
     print('Writting ' + out_file + ' ...')
     with codecs.open(out_file, 'w', encoding = 'utf-8') as text_file:
         text_file.write(
@@ -102,6 +102,6 @@ try:
                 'PKG_LIST' : pkg_list
             })
         )
-        
+
 except AttributeError:
     pass
